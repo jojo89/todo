@@ -9,8 +9,7 @@ if ARGV.any?
   elsif ARGV[0] == "delete"
     Task.destroy(ARGV[1])
   elsif ARGV[0] == "complete"
-    item = ARGV[1]
-    Task.update_attribute(:completeness, true)
+    Task.update(ARGV[1], :completeness => true)
   else
     puts "That command doesn't exist!"
   end
