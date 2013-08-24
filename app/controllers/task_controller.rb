@@ -3,13 +3,20 @@
 
 if ARGV.any?
   if ARGV[0] == "list"
-    p Task.all
+    Task.all.each do |t|
+      print "#{t.id}. #{t.description}\n"
+    end
   elsif ARGV[0] == "add"
-    Task.create(:description => ARGV[1..-1].join(' '))
+    task_new = Task.create(:description => ARGV[1..-1].join(' '))
+    print "Appended '#{task_new.description}' to your TODO list...\n"
   elsif ARGV[0] == "delete"
-    Task.destroy(ARGV[1])
+    deleted_task = Task.find(ARGV[1])
+    Task.destroy(deleted_task)
+    print "Deleted '#{deleted_task.description}' from your TODO list...\n"
   elsif ARGV[0] == "complete"
-    Task.update(ARGV[1], :completeness => true)
+    completed_task = Task.find(ARGV[1])
+    Task.update(completed_task, :completeness => true)
+    print "Completed '#{completed_task.description}' on your TODO list...\n"
   else
     puts "That command doesn't exist!"
   end
