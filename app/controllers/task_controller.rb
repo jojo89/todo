@@ -8,9 +8,22 @@ class TodoManager
     List.all.each do |l|
       list_item(l)
     end
-    list_num = gets.chomp.to_i
-    selected_list(list_num)
-    manage_selected_list(list_num)
+    list_action = gets.chomp.split(' ')
+    control     = list_action[0].downcase
+    argument    = list_action[1..-1].join(' ')
+    if control == "add"
+      list_new = List.create(name: argument)
+      new_list_message(list_new)
+      run!
+    elsif control == "delete"
+      list_to_delete = List.find(argument)
+      List.destroy(list_to_delete)
+      deleted_list_message(list_to_delete)
+      run!
+    else
+      selected_list(control)
+      manage_selected_list(control)
+    end
   end
 
   def manage_selected_list(list_num)

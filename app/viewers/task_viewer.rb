@@ -39,3 +39,11 @@ end
 def no_command_message
   puts "That command doesn't exist!"
 end
+
+def new_list_message(item)
+  print "Added new todo list '#{item.name}'.\n"
+end
+
+def deleted_list_message(item)
+  print "Deleted the todo list '#{item.name}'.\n"
+end
