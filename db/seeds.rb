@@ -1,9 +1,13 @@
 require_relative '../app/models/task'
 require 'faker'
 
+5.times do 
+  List.create!(:name => Faker::Name.name)
+end
+
 15.times do 
   Task.create!(
-      # :description => Faker::Name.name 
-       :description => Faker::Lorem.words(rand(3..10))
-      )
+    :list_id => rand(1..5),
+    :description => Faker::Name.name
+    )
 end 
